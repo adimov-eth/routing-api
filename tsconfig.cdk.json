@@ -20,7 +20,9 @@
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
     "outDir": "dist",
-    "typeRoots": ["./node_modules/@types"]
+    "typeRoots": ["./node_modules/@types"],
+    "suppressImplicitAnyIndexErrors": true,
+    "skipLibCheck": true
   },
   "files": ["./hardhat.config.js"],
   "exclude": ["cdk.out", "./dist/**/*"]

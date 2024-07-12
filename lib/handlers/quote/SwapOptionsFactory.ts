@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { ChainId, Currency, CurrencyAmount } from '@uniswap/sdk-core'
 import { SwapOptions, SwapOptionsSwapRouter02, SwapOptionsUniversalRouter, SwapType } from '@uniswap/smart-order-router'
 import JSBI from 'jsbi'

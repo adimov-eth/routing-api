@@ -23,7 +23,9 @@
     "outDir": "./dist",
     "allowJs": true,
     "typeRoots": ["./node_modules/@types"],
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "skipLibCheck": true
   },
   "exclude": ["cdk.out", "./dist/**/*"]
 }

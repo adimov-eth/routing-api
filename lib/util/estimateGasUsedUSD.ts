@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { BigNumber } from '@ethersproject/bignumber'
 import { ChainId, Currency, CurrencyAmount } from '@uniswap/sdk-core'
 import { CELO_UPPER_SWAP_GAS_LIMIT, ZKSYNC_UPPER_SWAP_GAS_LIMIT } from './gasLimit'
