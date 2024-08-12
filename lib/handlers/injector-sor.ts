@@ -30,7 +30,6 @@ import {
   V2PoolProvider,
   V2QuoteProvider,
   V3PoolProvider,
-  IRouteCachingProvider,
 } from '@uniswap/smart-order-router'
 import { TokenList } from '@uniswap/token-lists'
 import { default as bunyan, default as Logger } from 'bunyan'
@@ -44,21 +43,22 @@ import { AWSTokenListProvider } from './router-entities/aws-token-list-provider'
 import { DynamoRouteCachingProvider } from './router-entities/route-caching/dynamo-route-caching-provider'
 
 export const SUPPORTED_CHAINS: ChainId[] = [
-  ChainId.MAINNET,
-  ChainId.RINKEBY,
-  ChainId.ROPSTEN,
-  ChainId.KOVAN,
-  ChainId.OPTIMISM,
-  ChainId.OPTIMISTIC_KOVAN,
-  ChainId.ARBITRUM_ONE,
-  ChainId.ARBITRUM_RINKEBY,
-  ChainId.ARBITRUM_GOERLI,
-  ChainId.POLYGON,
-  ChainId.POLYGON_MUMBAI,
-  ChainId.GÖRLI,
-  ChainId.CELO,
-  ChainId.CELO_ALFAJORES,
-  ChainId.BSC,
+  // ChainId.MAINNET,
+  // ChainId.RINKEBY,
+  // ChainId.ROPSTEN,
+  // ChainId.KOVAN,
+  // ChainId.OPTIMISM,
+  // ChainId.OPTIMISTIC_KOVAN,
+  // ChainId.ARBITRUM_ONE,
+  // ChainId.ARBITRUM_RINKEBY,
+  // ChainId.ARBITRUM_GOERLI,
+  // ChainId.POLYGON,
+  // ChainId.POLYGON_MUMBAI,
+  // ChainId.GÖRLI,
+  // ChainId.CELO,
+  // ChainId.CELO_ALFAJORES,
+  // ChainId.BSC,
+  ChainId.STRATIS
 ]
 const DEFAULT_TOKEN_LIST = 'https://gateway.ipfs.io/ipns/tokens.uniswap.org'
 
@@ -87,7 +87,7 @@ export type ContainerDependencies = {
   onChainQuoteProvider?: OnChainQuoteProvider
   v2QuoteProvider: V2QuoteProvider
   simulator: Simulator
-  routeCachingProvider?: IRouteCachingProvider
+  routeCachingProvider?: any // or a more specific type if you know the structure
 }
 
 export interface ContainerInjected {
@@ -291,7 +291,7 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
           })(),
         ])
 
-        let routeCachingProvider: IRouteCachingProvider | undefined = undefined
+        let routeCachingProvider: any = undefined
         if (CACHED_ROUTES_TABLE_NAME && CACHED_ROUTES_TABLE_NAME !== '') {
           routeCachingProvider = new DynamoRouteCachingProvider({ cachedRoutesTableName: CACHED_ROUTES_TABLE_NAME })
         }

@@ -402,45 +402,47 @@ export class QuoteHandler extends APIGLambdaHandler<
             amountOut: edgeAmountOut,
           })
         } else {
-          const reserve0 = nextPool.reserve0
-          const reserve1 = nextPool.reserve1
+          if ('reserve0' in nextPool && 'reserve1' in nextPool) {
+            const reserve0 = nextPool.reserve0
+            const reserve1 = nextPool.reserve1
 
-          curRoute.push({
-            type: 'v2-pool',
-            address: v2PoolProvider.getPoolAddress(nextPool.token0, nextPool.token1).poolAddress,
-            tokenIn: {
-              chainId: tokenIn.chainId,
-              decimals: tokenIn.decimals.toString(),
-              address: tokenIn.address,
-              symbol: tokenIn.symbol!,
-            },
-            tokenOut: {
-              chainId: tokenOut.chainId,
-              decimals: tokenOut.decimals.toString(),
-              address: tokenOut.address,
-              symbol: tokenOut.symbol!,
-            },
-            reserve0: {
-              token: {
-                chainId: reserve0.currency.wrapped.chainId,
-                decimals: reserve0.currency.wrapped.decimals.toString(),
-                address: reserve0.currency.wrapped.address,
-                symbol: reserve0.currency.wrapped.symbol!,
+            curRoute.push({
+              type: 'v2-pool',
+              address: v2PoolProvider.getPoolAddress(nextPool.token0 as any, nextPool.token1 as any).poolAddress,
+              tokenIn: {
+                chainId: tokenIn.chainId,
+                decimals: tokenIn.decimals.toString(),
+                address: tokenIn.address,
+                symbol: tokenIn.symbol!,
               },
-              quotient: reserve0.quotient.toString(),
-            },
-            reserve1: {
-              token: {
-                chainId: reserve1.currency.wrapped.chainId,
-                decimals: reserve1.currency.wrapped.decimals.toString(),
-                address: reserve1.currency.wrapped.address,
-                symbol: reserve1.currency.wrapped.symbol!,
+              tokenOut: {
+                chainId: tokenOut.chainId,
+                decimals: tokenOut.decimals.toString(),
+                address: tokenOut.address,
+                symbol: tokenOut.symbol!,
               },
-              quotient: reserve1.quotient.toString(),
-            },
-            amountIn: edgeAmountIn,
-            amountOut: edgeAmountOut,
-          })
+              reserve0: {
+                token: {
+                  chainId: reserve0.currency.wrapped.chainId,
+                  decimals: reserve0.currency.wrapped.decimals.toString(),
+                  address: reserve0.currency.wrapped.address,
+                  symbol: reserve0.currency.wrapped.symbol!,
+                },
+                quotient: reserve0.quotient.toString(),
+              },
+              reserve1: {
+                token: {
+                  chainId: reserve1.currency.wrapped.chainId,
+                  decimals: reserve1.currency.wrapped.decimals.toString(),
+                  address: reserve1.currency.wrapped.address,
+                  symbol: reserve1.currency.wrapped.symbol!,
+                },
+                quotient: reserve1.quotient.toString(),
+              },
+              amountIn: edgeAmountIn,
+              amountOut: edgeAmountOut,
+            })
+          }
         }
       }
 
